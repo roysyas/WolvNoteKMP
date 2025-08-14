@@ -12,10 +12,12 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.*
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.roys.wolvnotekmp.presentation.util.theme.WolvNoteTheme
 import com.roys.wolvnotekmp.presentation.util.AppNavHost
 import com.roys.wolvnotekmp.presentation.util.ObserveAsEvents
+import com.roys.wolvnotekmp.presentation.util.Screen
 import com.roys.wolvnotekmp.presentation.util.SnackBarController
 import com.roys.wolvnotekmp.presentation.util.composableicon.BackIcon
 import kotlinx.coroutines.launch
@@ -29,6 +31,9 @@ fun App() {
         val navController = rememberNavController()
         val scope = rememberCoroutineScope()
         val snackBarHostState = remember { SnackbarHostState() }
+        val currentBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentDestination = currentBackStackEntry?.destination?.route
+
         ObserveAsEvents(
             flow = SnackBarController.events,
             snackBarHostState
@@ -42,42 +47,35 @@ fun App() {
             }
         }
 
-        if(getPlatform().name.contains("Java")){
-            Scaffold(
-                topBar = { TopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            navController.navigateUp()
-                        }) {
-                            Icon(
-                                imageVector = BackIcon(),
-                                contentDescription = "navigation",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    },
-                    title = { null }
-                ) },
-                contentWindowInsets = WindowInsets.safeDrawing,
-                snackbarHost = {
-                    SnackbarHost(
-                        hostState = snackBarHostState
-                    )
+        Scaffold(
+            topBar = {
+                if(getPlatform().name.contains("Java")){
+                    if(currentDestination != Screen.AuthScreen.route && currentDestination != Screen.SettingPasswordScreen.route){
+                        TopAppBar(
+                            navigationIcon = {
+                                IconButton(onClick = {
+                                    navController.navigateUp()
+                                }) {
+                                    Icon(
+                                        imageVector = BackIcon(),
+                                        contentDescription = "navigation",
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            },
+                            title = { null }
+                        )
+                    }
                 }
-            ) { innerPadding ->
-                AppNavHost(navController, innerPadding)
+            },
+            contentWindowInsets = WindowInsets.safeDrawing,
+            snackbarHost = {
+                SnackbarHost(
+                    hostState = snackBarHostState
+                )
             }
-        }else{
-            Scaffold(
-                contentWindowInsets = WindowInsets.safeDrawing,
-                snackbarHost = {
-                    SnackbarHost(
-                        hostState = snackBarHostState
-                    )
-                }
-            ) { innerPadding ->
-                AppNavHost(navController, innerPadding)
-            }
+        ) { innerPadding ->
+            AppNavHost(navController, innerPadding)
         }
     }
 }
