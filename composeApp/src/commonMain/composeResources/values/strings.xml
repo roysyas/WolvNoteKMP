@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">WolvNote</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="input_password">Input password</string>
+    <string name="submit">Submit</string>
+    <string name="create_password">create password</string>
+    <string name="create_hint">create hint</string>
+    <string name="hint">hint:</string>
+    <string name="empty_password">empty password</string>
+    <string name="empty_hint">empty hint</string>
+    <string name="empty_notes">empty notes</string>
+    <string name="add_notes">add notes</string>
+    <string name="create_checklist">Create checklist</string>
+    <string name="create_notes">Create notes</string>
+    <string name="create_salary">Create salary allocation</string>
+    <string name="create_draw">Create draw</string>
+    <string name="delete_list_item">Delete list item</string>
+    <string name="add_item">Add item to list</string>
+    <string name="empty_checklist">Empty checklist</string>
+    <string name="input_title">Input title</string>
+    <string name="save">Save</string>
+    <string name="input_checklist">Input checklist</string>
+    <string name="input_note">Input note</string>
+    <string name="input_salary">Input salary amount</string>
+    <string name="salary_result">Salary calculation result</string>
+    <string name="clear">Clear</string>
+    <string name="save_and_export">export to</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete_message">delete this note?</string>
+</resources>
