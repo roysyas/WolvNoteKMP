@@ -8,7 +8,6 @@ import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 
 object DateTimeHelper {
 
@@ -29,5 +28,10 @@ object DateTimeHelper {
     fun getId(): String{
         val now = Clock.System.now()
         return now.toEpochMilliseconds().toString()
+    }
+
+    fun getTimeZone(): String{
+        val timeZone: TimeZone = TimeZone.currentSystemDefault()
+        return timeZone.id
     }
 }

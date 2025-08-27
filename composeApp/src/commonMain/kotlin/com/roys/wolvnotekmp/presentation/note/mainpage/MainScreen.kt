@@ -1,8 +1,10 @@
 package com.roys.wolvnotekmp.presentation.note.mainpage
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.roys.wolvnotekmp.common.Constants
 import com.roys.wolvnotekmp.presentation.note.mainpage.component.CustomFloatingButton
+import com.roys.wolvnotekmp.presentation.note.mainpage.component.LocationPermission
 import com.roys.wolvnotekmp.presentation.note.mainpage.component.NoteItem
 import com.roys.wolvnotekmp.presentation.util.Screen
 import org.jetbrains.compose.resources.stringResource
@@ -31,6 +34,12 @@ fun MainScreen(
 ) {
     val state by viewModel.state.collectAsState()
     val emptyNotes = stringResource(Res.string.empty_notes)
+
+    LocationPermission(
+        onGranted = {
+            viewModel.handleEvent(HomeEvent.RequestPermission(it))
+        }
+    )
 
     LaunchedEffect(key1 = Unit) {
         navController.currentBackStackEntry?.savedStateHandle?.getStateFlow(Constants.REFRESH, false)?.collect { result->
@@ -59,14 +68,37 @@ fun MainScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
         }
-        if(state.noteList.isNotEmpty()){
-            NoteItem(
-                listNoteTable = state.noteList,
-                navController = navController,
-                onDelete = {data->
-                    viewModel.handleEvent(HomeEvent.OnDelete(data))
+        Column {
+            state.currentWeather?.let {
+                Column(
+                    modifier = Modifier
+                        .padding(0.dp, 0.dp, 8.dp, 8.dp)
+                        .align(Alignment.End)
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = it.temperature,
+                        color = MaterialTheme.colorScheme.outlineVariant,
+                        modifier = Modifier
+                            .align(Alignment.End)
+                    )
+                    Text(
+                        text = it.weather,
+                        color = MaterialTheme.colorScheme.outlineVariant,
+                        modifier = Modifier
+                            .align(Alignment.End)
+                    )
                 }
-            )
+            }
+            if (state.noteList.isNotEmpty()) {
+                NoteItem(
+                    listNoteTable = state.noteList,
+                    navController = navController,
+                    onDelete = { data ->
+                        viewModel.handleEvent(HomeEvent.OnDelete(data))
+                    }
+                )
+            }
         }
         Box(
             modifier = Modifier

@@ -2,11 +2,14 @@ package com.roys.wolvnotekmp.presentation.note.mainpage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.roys.wolvnotekmp.common.DateTimeHelper
+import com.roys.wolvnotekmp.domain.repository.ILocationProvider
 import com.roys.wolvnotekmp.common.Resource
 import com.roys.wolvnotekmp.data.database.NoteTable
 import com.roys.wolvnotekmp.domain.usecase.DeleteNoteUseCase
 import com.roys.wolvnotekmp.domain.usecase.GetNoteUseCase
 import com.roys.wolvnotekmp.domain.usecase.GetNotesUseCase
+import com.roys.wolvnotekmp.domain.usecase.WeatherUseCase
 import com.roys.wolvnotekmp.presentation.util.SnackBarController
 import com.roys.wolvnotekmp.presentation.util.SnackBarError
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +23,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val getNotesUseCase: GetNotesUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,
-    private val getNoteUseCase: GetNoteUseCase
+    private val getNoteUseCase: GetNoteUseCase,
+    private val locationProvider: ILocationProvider,
+    private val weatherUseCase: WeatherUseCase
 ): ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
@@ -35,6 +40,7 @@ class HomeViewModel(
             is HomeEvent.OnToggle -> onToggle(viewEvent.toggle)
             is HomeEvent.OnRefresh -> getNotes()
             is HomeEvent.OnDelete -> prepareDeleteNote(viewEvent.item)
+            is HomeEvent.RequestPermission -> fetchLocation(viewEvent.granted)
         }
     }
 
@@ -119,5 +125,55 @@ class HomeViewModel(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun fetchLocation(granted: Boolean){
+        if(granted){
+            viewModelScope.launch {
+                val loc = locationProvider.getCurrentLocation()
+                _state.update {
+                    it.copy(
+                        location = loc
+                    )
+                }
+                getWeather()
+            }
+        }
+    }
+
+    private fun getWeather(){
+        val lat = _state.value.location?.lat
+        val lng = _state.value.location?.lng
+        val timezone = DateTimeHelper.getTimeZone()
+
+        lat?.let {
+            lng?.let {
+                weatherUseCase.invoke(lat, lng, timezone).onEach { result->
+                    when(result){
+                        is Resource.Error -> {
+                            _state.update {
+                                it.copy(
+                                    weatherError = result.message ?: "An unexpected error occurred"
+                                )
+                            }
+                        }
+                        is Resource.Loading -> {
+                            _state.update {
+                                it.copy(
+                                    weatherIsLoading = true
+                                )
+                            }
+                        }
+                        is Resource.Success -> {
+                            _state.update {
+                                it.copy(
+                                    currentWeather = result.data
+                                )
+                            }
+                        }
+                    }
+                }.launchIn(viewModelScope)
+            }
+        }
     }
 }
