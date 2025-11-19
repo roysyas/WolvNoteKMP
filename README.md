@@ -18,3 +18,5 @@
 
 
 ***For native Android project please visit [https://github.com/roysyas/WolvNote](https://github.com/roysyas/WolvNote)***
+
+***For Flutter project please visit [https://github.com/roysyas/wolvnote_flutter](https://github.com/roysyas/wolvnote_flutter)***
