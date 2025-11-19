@@ -8,7 +8,6 @@ import com.roys.wolvnotekmp.domain.model.CurrentWeather
 data class HomeState(
     val isLoading: Boolean = false,
     val error: String = "",
-    val isEmpty: Boolean = false,
     val isToggle: Boolean = false,
     val noteList: List<NoteTable> = listOf(),
     val isGranted: Boolean = false,

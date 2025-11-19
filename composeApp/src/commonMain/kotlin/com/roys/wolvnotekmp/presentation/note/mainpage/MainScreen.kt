@@ -54,7 +54,7 @@ fun MainScreen(
         .padding(paddingValues)
         .padding(8.dp)
     ) {
-        if(state.isEmpty){
+        if(state.noteList.isEmpty()){
             Text(
                 text = emptyNotes,
                 color = MaterialTheme.colorScheme.primary,

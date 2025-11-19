@@ -86,7 +86,7 @@ class HomeViewModel(
                 }
                 is Resource.Success -> {
                     if(result.data.isNullOrEmpty()){
-                        _state.value = HomeState(isEmpty = true)
+                        _state.value = HomeState(noteList = emptyList())
                     }else{
                         _state.value = HomeState(noteList = result.data)
                     }
