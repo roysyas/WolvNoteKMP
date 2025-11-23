@@ -11,7 +11,7 @@ import com.roys.wolvnotekmp.common.DateTimeHelper
 import com.roys.wolvnotekmp.common.ExportToImageFileHelper
 import com.roys.wolvnotekmp.common.Resource
 import com.roys.wolvnotekmp.common.exportToImageFile
-import com.roys.wolvnotekmp.data.database.NoteTable
+import com.roys.wolvnotekmp.domain.model.NoteTable
 import com.roys.wolvnotekmp.domain.model.DrawContentData
 import com.roys.wolvnotekmp.domain.model.PathData
 import com.roys.wolvnotekmp.domain.usecase.GetNoteUseCase

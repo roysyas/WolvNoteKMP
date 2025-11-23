@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.roys.wolvnotekmp.common.DateTimeHelper
 import com.roys.wolvnotekmp.domain.repository.ILocationProvider
 import com.roys.wolvnotekmp.common.Resource
-import com.roys.wolvnotekmp.data.database.NoteTable
+import com.roys.wolvnotekmp.domain.model.NoteTable
 import com.roys.wolvnotekmp.domain.usecase.DeleteNoteUseCase
 import com.roys.wolvnotekmp.domain.usecase.GetNoteUseCase
 import com.roys.wolvnotekmp.domain.usecase.GetNotesUseCase

@@ -13,7 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.roys.wolvnotekmp.common.Constants
-import com.roys.wolvnotekmp.data.database.NoteTable
+import com.roys.wolvnotekmp.domain.model.NoteTable
 import com.roys.wolvnotekmp.presentation.note.component.ConfirmationDialog
 import com.roys.wolvnotekmp.presentation.util.Screen
 import com.roys.wolvnotekmp.presentation.util.composableicon.DeleteIcon

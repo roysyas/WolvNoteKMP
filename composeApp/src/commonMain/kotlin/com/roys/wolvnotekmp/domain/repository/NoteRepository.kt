@@ -1,6 +1,6 @@
 package com.roys.wolvnotekmp.domain.repository
 
-import com.roys.wolvnotekmp.data.database.NoteTable
+import com.roys.wolvnotekmp.domain.model.NoteTable
 
 interface NoteRepository {
     suspend fun insertNote(noteTable: NoteTable)

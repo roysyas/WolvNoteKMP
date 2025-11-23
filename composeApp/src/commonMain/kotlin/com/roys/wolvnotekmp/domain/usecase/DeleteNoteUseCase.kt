@@ -1,7 +1,7 @@
 package com.roys.wolvnotekmp.domain.usecase
 
 import com.roys.wolvnotekmp.common.Resource
-import com.roys.wolvnotekmp.data.database.NoteTable
+import com.roys.wolvnotekmp.domain.model.NoteTable
 import com.roys.wolvnotekmp.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

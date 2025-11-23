@@ -1,7 +1,7 @@
 package com.roys.wolvnotekmp.presentation.note.mainpage
 
 import com.roys.wolvnotekmp.domain.model.Location
-import com.roys.wolvnotekmp.data.database.NoteTable
+import com.roys.wolvnotekmp.domain.model.NoteTable
 import com.roys.wolvnotekmp.domain.model.CurrentWeather
 
 

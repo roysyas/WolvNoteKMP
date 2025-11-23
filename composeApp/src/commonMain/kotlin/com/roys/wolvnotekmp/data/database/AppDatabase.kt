@@ -3,6 +3,8 @@ package com.roys.wolvnotekmp.data.database
 import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.roys.wolvnotekmp.domain.model.NoteTable
+import com.roys.wolvnotekmp.domain.model.PasswordTable
 
 @Database(
     entities = [NoteTable::class, PasswordTable::class],

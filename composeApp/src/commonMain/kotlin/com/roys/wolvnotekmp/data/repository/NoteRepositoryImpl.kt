@@ -1,7 +1,7 @@
 package com.roys.wolvnotekmp.data.repository
 
 import com.roys.wolvnotekmp.data.database.NoteDao
-import com.roys.wolvnotekmp.data.database.NoteTable
+import com.roys.wolvnotekmp.domain.model.NoteTable
 import com.roys.wolvnotekmp.domain.repository.NoteRepository
 
 class NoteRepositoryImpl(private val noteDao: NoteDao): NoteRepository {

@@ -7,7 +7,7 @@ import com.roys.wolvnotekmp.common.PreferenceDataStore
 import com.roys.wolvnotekmp.common.Resource
 import com.roys.wolvnotekmp.common.UiText
 import com.roys.wolvnotekmp.common.SecureStorage
-import com.roys.wolvnotekmp.data.database.PasswordTable
+import com.roys.wolvnotekmp.domain.model.PasswordTable
 import com.roys.wolvnotekmp.domain.usecase.password.InsertPasswordUseCase
 import com.roys.wolvnotekmp.presentation.util.SnackBarController
 import com.roys.wolvnotekmp.presentation.util.SnackBarError

@@ -1,4 +1,4 @@
-package com.roys.wolvnotekmp.data.database
+package com.roys.wolvnotekmp.domain.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -3,6 +3,7 @@ package com.roys.wolvnotekmp.data.database
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.roys.wolvnotekmp.domain.model.PasswordTable
 
 @Dao
 interface PasswordDao {
